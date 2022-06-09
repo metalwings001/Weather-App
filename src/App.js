@@ -52,7 +52,6 @@ const DailyWeather = ({weatherList}) => {
  
   return (
     <div>
-       <div class="mid2Title"> Today's weather</div>
       <div class="weather-box">
         
       <div class="date">
@@ -89,6 +88,7 @@ const HtmlStructure = () => {
   const [maxTempList, setMaxTempList] = useState([])
   const [minTempList, setMinTempList] = useState([])
   const [dailyIconList, setDailyIcon] = useState([])
+  var mid2TitleText = ''
   
   
 
@@ -181,8 +181,9 @@ const HtmlStructure = () => {
       <div class="sidebar1">
 
       </div>
+      <div class="mid1Title">What's my forecast?</div>
       <div class="mid1">
-        <div class="mid1Title">What's my forecast?</div>
+        
         <form class ="weatherForm" onSubmit={getCordinates}>
           <div class="input-group">
             <label for="city">Enter your city</label>
@@ -199,6 +200,7 @@ const HtmlStructure = () => {
        
          
       </div>
+      <div class="mid2Title"> {weatherList.hourly !== undefined ? "Today's Weather" : ""}</div>
       <div class="mid2">
         {weatherList.hourly !== undefined ? <DailyWeather weatherList={weatherList} />  : <Blank />}
 
