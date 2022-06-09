@@ -7,56 +7,12 @@ import globe from './images/globe.png'
 import sun from './images/sun.png'
 
 const cardCounter = [0,1,2,3,4]
-var flag = false
 
-const FiveDayForecast = ({weatherList}) => {
-   
-    const [myDateList, setDateList] = useState([])
-    const [maxTempList, setMaxTempList] = useState([])
-    const [minTempList, setMinTempList] = useState([])
-    const [dailyIconList, setDailyIcon] = useState([])
 
-   const setCalendarDates = () => {
-    
-    let dateList = []
-    
-    let minTemp = []
-    let maxTemp = []
-    let iconList = []
-    const currDate = new Date()
-    let calendarDay = currDate.getDate()
-    let calendarMonth = currDate.getMonth()
-
-    console.log(currDate, calendarMonth, calendarDay)
-
-    //dateList.push(calendarMonth + 1 + '/' + calendarDay)
-    //console.log(dateList)
-
-    let myDate = new Date()
-    for(let i = 0; i <  5; i++) {
-      myDate.setDate(currDate.getDate()+i)
-      dateList.push(myDate.getMonth() + 1 + '/' + myDate.getDate())
-
-      minTemp.push(weatherList.daily[i].temp.min)
-      maxTemp.push(weatherList.daily[i].temp.max)
-      iconList.push(weatherList.daily[i].weather[0].icon)
-      console.log('test:',weatherList.daily[i].weather[0].icon)
-      console.log('test2:',weatherList.daily[i].weather[0].icon)
-    }
-    //console.log(dateList,maxTempList,minTempList,dailyIconList)
-    console.log(dateList)
-
-    setDateList(dateList)
-    setMaxTempList(maxTemp)
-    setMinTempList(minTemp)
-    setDailyIcon(iconList)
-    console.log('dailyiconList:',  )
-    flag = false;
-    
-  }
+const FiveDayForecast = ({weatherList,myDateList,maxTempList,minTempList,dailyIconList}) => {  
+  
   return (
     <div>
-      {flag ? setCalendarDates() : false}
       <div class="day5title">
         Your 5 day forecast
       </div>
@@ -70,11 +26,7 @@ const FiveDayForecast = ({weatherList}) => {
         </div>
       )}
       </div>
-    </div>
-       
-
-
-    
+    </div> 
   )
 }
 
@@ -88,6 +40,7 @@ const Blank = () => {
 }
 
 const DailyWeather = ({weatherList}) => {
+
   console.log("inside DailyWeather!")
   console.log("weahterList: " ,weatherList)
 
@@ -101,7 +54,7 @@ const DailyWeather = ({weatherList}) => {
     <div>
        <div class="mid2Title"> Today's weather</div>
       <div class="weather-box">
-        <div class="weather-box"></div>
+        
       <div class="date">
             {calendarMonth+1 + '/' + calendarDay}
           </div>
@@ -131,6 +84,12 @@ const HtmlStructure = () => {
   const [geoList,setGeoList] = useState([])
   const [weatherList, setWeatherList] = useState([])
   const [update, setUpdate] = useState(0)
+
+  const [myDateList, setDateList] = useState([])
+  const [maxTempList, setMaxTempList] = useState([])
+  const [minTempList, setMinTempList] = useState([])
+  const [dailyIconList, setDailyIcon] = useState([])
+  
   
 
   const handleCityChange = (event) => {
@@ -140,10 +99,12 @@ const HtmlStructure = () => {
     setZip(event.target.value)
   }
   const getCordinates = async (event) => {
-    flag = true
-    console.log("inside getCordinates flag:",flag)
-    event.preventDefault()
+    if(event) {
+      event.preventDefault()
+    }
     console.log("inside getCordiantes!")
+    console.log('getcord myZip', myZip)
+    
     await axios
       .get(`https://nominatim.openstreetmap.org/search?format=json&city=${myCity}`
       + `&postalcode=${myZip}`)
@@ -156,10 +117,51 @@ const HtmlStructure = () => {
       .then(response => {
         console.log('promised fulfilled2')
         setWeatherList(response.data)
+        console.log("inside getCordinates weatherList: ", response.data)
+        let dateList = []
+      
+        let minTemp = []
+        let maxTemp = []
+        let iconList = []
+        const currDate = new Date()
+        let calendarDay = currDate.getDate()
+        let calendarMonth = currDate.getMonth()
+    
+        console.log(currDate, calendarMonth, calendarDay)
+    
+        //dateList.push(calendarMonth + 1 + '/' + calendarDay)
+        //console.log(dateList)
+    
+        let myDate = new Date()
+        for(let i = 0; i <  5; i++) {
+          myDate.setDate(currDate.getDate()+i)
+          dateList.push(myDate.getMonth() + 1 + '/' + myDate.getDate())
+    
+          minTemp.push(response.data.daily[i].temp.min)
+          maxTemp.push(response.data.daily[i].temp.max)
+          iconList.push(response.data.daily[i].weather[0].icon)
+          console.log('test:',response.data.daily[i].weather[0].icon)
+          console.log('test2:',response.data.daily[i].weather[0].icon)
+        }
+        //console.log(dateList,maxTempList,minTempList,dailyIconList)
+        console.log(dateList)
+    
+        setDateList(dateList)
+        setMaxTempList(maxTemp)
+        setMinTempList(minTemp)
+        setDailyIcon(iconList)
+        console.log('dailyiconList:',  )
       })
-     
+    
     }
- 
+    useEffect(()  => {
+      /*setCity('Los Angeles')
+      setZip('90013')
+      console.log('myZip', myZip)
+      
+      getCordinates()*/
+      
+    },[])
 
   console.log('weatherList.hourly: ', weatherList.hourly)
 
@@ -184,11 +186,11 @@ const HtmlStructure = () => {
         <form class ="weatherForm" onSubmit={getCordinates}>
           <div class="input-group">
             <label for="city">Enter your city</label>
-            <input id="city" type="text" value={myCity} onChange = {handleCityChange}></input>
+            <input id="city" type="text" value={myCity} onChange = {handleCityChange} ></input>
           </div>
           <div class="input-group">
             <label for="zipcode">Enter your zipcode</label>
-            <input id="zipcode" type="number" value={myZip} onChange = {handleZipChange} defaultValue = "1"></input>
+            <input id="zipcode" type="number" value={myZip} onChange = {handleZipChange} ></input>
           </div>
           <div class="input-group">
               <button type="submit" class="btn">Submit</button>
@@ -202,7 +204,8 @@ const HtmlStructure = () => {
 
       </div>
       <div class="day5">
-      {weatherList.hourly !== undefined ? <FiveDayForecast weatherList={weatherList}/> : <Blank />}
+      {weatherList.hourly !== undefined ? <FiveDayForecast weatherList={weatherList} myDateList = {myDateList}
+      maxTempList = {maxTempList} minTempList = {minTempList} dailyIconList = {dailyIconList}/> : <Blank />}
        
       </div>
       <div class="sidebar2">

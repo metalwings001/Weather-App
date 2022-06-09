@@ -82,10 +82,11 @@ body {
   margin-right: 0.8rem; 
 }
 .weatherForm {
-  margin-top: 7%;
-  margin-left: 15%;
-  margin-right: 15%;
-  padding: 1.5rem 3rem;
+  margin-top: 1.5rem;
+  margin-left: 10rem;
+  margin-right:  10rem;
+  
+  padding: 3em 3rem;
   background-color: #e77642;
   border-radius: 20px;
   
@@ -132,15 +133,18 @@ body {
   display: flex;
   justify-content: center;
   font-size: 2em;
- 
-  margin-bottom: 0.7rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .weather-box {
   display: flex;
   padding: 0.3rem;
+  padding-top: .6rem;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 
+  
   height: 19.5rem;
   width: 12rem;
   border-radius: 10px;
