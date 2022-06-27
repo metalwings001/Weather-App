@@ -71,9 +71,6 @@ const DailyWeather = ({weatherList}) => {
           </div>
         </div>
       </div>
-
-    
-  
   )
 }
 
@@ -112,7 +109,7 @@ const HtmlStructure = () => {
         console.log("promise fulfilled1")
         setGeoList(response.data[0])
         return axios.get(`https://api.openweathermap.org/data/2.5/` +
-        `onecall?lat=${response.data[0].lat}&lon=${response.data[0].lon}&units=imperial&appid=00ca7eb450d6e95d29159e16c12adbca`)
+        `onecall?lat=${response.data[0].lat}&lon=${response.data[0].lon}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
       }) //an example of chaining axios get calls must use response.data for sequential intended results
       .then(response => {
         console.log('promised fulfilled2')
@@ -129,13 +126,10 @@ const HtmlStructure = () => {
     
         console.log(currDate, calendarMonth, calendarDay)
     
-        //dateList.push(calendarMonth + 1 + '/' + calendarDay)
-        //console.log(dateList)
-    
         let myDate = new Date()
-        for(let i = 0; i <  5; i++) {
+        for(let i = 0; i <  5; i++) { //sets up our 5 day forecast
           myDate.setDate(currDate.getDate()+i)
-          dateList.push(myDate.getMonth() + 1 + '/' + myDate.getDate())
+          dateList.push(myDate.getMonth() + 1 + '/' + myDate.getDate()) //format dates for 5 day forecast
     
           minTemp.push(response.data.daily[i].temp.min)
           maxTemp.push(response.data.daily[i].temp.max)
@@ -154,14 +148,6 @@ const HtmlStructure = () => {
       })
     
     }
-    useEffect(()  => {
-      /*setCity('Los Angeles')
-      setZip('90013')
-      console.log('myZip', myZip)
-      
-      getCordinates()*/
-      
-    },[])
 
   console.log('weatherList.hourly: ', weatherList.hourly)
 
@@ -228,26 +214,6 @@ const HtmlStructure = () => {
 }
 
 const App = () => {
-  const [apiList, setApiList] = useState([])
-  const [geoList,setGeoList] = useState([])
- 
-
- 
-  
-  /*useEffect(()  => {
-    console.log('weatherEffect')
-    axios 
-    .get("https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=00ca7eb450d6e95d29159e16c12adbca")
-
-      .then(response => {
-        console.log("promise fulfilled")
-        setApiList(response.data)
-      })
-    },[])*/
-
-    //console.log('apiList: ', apiList)
-    
-
   return (
     <div>
       <HtmlStructure />
