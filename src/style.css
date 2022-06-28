@@ -3,8 +3,15 @@
   font-family: Verdana;
   padding: 0;
   margin: 0;
-  
 }
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
 body {
   
 }
@@ -252,5 +259,6 @@ body {
   .mid2Title{
     padding-left: 20%;
   }
+  .day5container{}
   
 }
