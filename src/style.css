@@ -86,8 +86,9 @@ body {
   margin-top: 1.5rem;
   margin-left: 10rem;
   margin-right:  10rem;
+  width: 20rem;
   
-  padding: 3em 3rem;
+  padding: 3rem 3rem;
   background-color: #e77642;
   border-radius: 20px;
   
@@ -194,8 +195,6 @@ body {
   width: 12rem;
   border-radius: 10px;
   background-color: #EDE7E3;
-    
-  
 }
 .day5title {
   display: flex;
@@ -216,4 +215,23 @@ body {
   height: 3rem;
   margin-left: 0.3rem;
   margin-right: 0.3rem;
+}
+
+@media(max-width:1330px) {
+  .grid {
+    display: grid;
+    grid-template-rows: 1fr .4fr 4fr 4fr 1fr;
+    grid-template-columns: .01fr 3fr 3fr .01fr;
+  }
+  .weather-box-forecast {
+    display: flex;
+    padding: 0.5rem;
+    flex-direction: column;
+    align-items: center;
+  
+    height: 14rem;
+    width: 8rem;
+    border-radius: 10px;
+    background-color: #EDE7E3;
+  }
 }
