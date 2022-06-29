@@ -8,12 +8,9 @@ html, body{
    
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden; 
+   
 }
 
-body {
-  
-}
 .grid{
   display: grid;
 
@@ -46,6 +43,7 @@ body {
   grid-row: 3;
   grid-column: 3;
   background-color:#42bbe7;
+  
 }
 .day5 {
   grid-row: 4;
@@ -121,7 +119,7 @@ body {
   display: flex;
   justify-content: center;
  
-  font-size: 2em;
+  font-size: 2rem;
   background-color: #42bbe7;
 }
 .input-group input {
@@ -151,7 +149,7 @@ body {
   display: flex;
   justify-content: center;
   
-  font-size: 2em;
+  font-size: 2rem;
   
  
   background-color: #42bbe7;
@@ -202,6 +200,7 @@ body {
   width: 10.5rem;
   border-radius: 10px;
   background-color: #EDE7E3;
+  margin-bottom: 1rem;
 }
 .day5title {
   display: flex;
@@ -237,7 +236,7 @@ body {
     display: grid;
     height: auto;
     grid-template-rows: 1fr .4fr 1.7fr 4fr 1fr;
-    grid-template-columns: .01fr 3fr 3fr .1fr;
+    grid-template-columns: .01fr 3fr 3fr .01fr;
   }
   .weather-box-forecast {
     display: flex;
@@ -263,6 +262,9 @@ body {
   .mid2{
     padding-top:.6rem;
     align-items: flex-start;
+  }
+  .mid2Title{
+    padding-left: 15%;
   }
   
   
