@@ -41,8 +41,8 @@ const Blank = () => {
 
 const DailyWeather = ({weatherList}) => {
 
-  console.log("inside DailyWeather!")
-  console.log("weahterList: " ,weatherList)
+  //console.log("inside DailyWeather!")
+  //console.log("weahterList: " ,weatherList)
 
   //const currDate = new Date();
   //console.log(currDate)
@@ -121,15 +121,17 @@ const HtmlStructure = () => {
         let maxTemp = []
         let iconList = []
         const currDate = new Date()
-        let calendarDay = currDate.getDate()
-        let calendarMonth = currDate.getMonth()
+        //let calendarDay = currDate.getDate()
+        //let calendarMonth = currDate.getMonth()
     
-        console.log(currDate, calendarMonth, calendarDay)
+        //console.log(currDate, calendarMonth, calendarDay)
     
-        let myDate = new Date()
+        //let myDate = new Date()
         for(let i = 0; i <  5; i++) { //sets up our 5 day forecast
-          myDate.setDate(currDate.getDate()+i)
-          dateList.push(myDate.getMonth() + 1 + '/' + myDate.getDate()) //format dates for 5 day forecast
+          
+          currDate.setDate(currDate.getDate()+1)
+
+          dateList.push(currDate.getMonth() + 1 + '/' + currDate.getDate()) //format dates for 5 day forecast
     
           minTemp.push(response.data.daily[i].temp.min)
           maxTemp.push(response.data.daily[i].temp.max)
